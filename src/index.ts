@@ -32,6 +32,7 @@ declare type MyMessage = {
   value: number;
 };
 
+
 // This will create an AVRO schema from an .avsc file
 const registerSchema = async () => {
   try {
@@ -63,6 +64,7 @@ const produceToKafka = async (registryId: number, message: MyMessage) => {
   // disconnect the producer
   await producer.disconnect();
 };
+const payload = await avroProducer.serialize(message, userSchema);
 
 // create the kafka topic where we are going to produce the data
 const createTopic = async () => {
